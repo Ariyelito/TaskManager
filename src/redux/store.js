@@ -11,9 +11,7 @@ const rootReducer = combineReducers({
 
 const middleware = composeWithDevTools(applyMiddleware(thunk))
 
-const store = createStore(
+export default createStore(
     rootReducer,
     middleware
   );
-
-export default store;

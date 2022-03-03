@@ -18,7 +18,7 @@ export const TaskList = (props) => {
                 </Pressable>
                 <Pressable
                     onPress={() => removeTask(index)}
-                    style={styles.cardDelete}>
+                    style={!props.active ? styles.cardAdd : styles.cardDelete}>
                     <Text style={{ color: 'white', textAlign: 'center' }}>x</Text>
                 </Pressable>
             </View>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     },
     ajouterBtn: {
         height: 40,
-        backgroundColor: 'green',
+        backgroundColor: '#339',
         justifyContent: 'center',
         borderRadius: 5,
         padding: 10
@@ -83,9 +83,17 @@ const styles = StyleSheet.create({
     cardDelete: {
         height: 40,
         width: 40,
-        backgroundColor: '#ff4040',
+        backgroundColor: '#CC3300',
         padding: 10,
         marginLeft: 5,
         borderRadius: 5,
-    }
+    },
+    cardAdd: {
+        height: 40,
+        width: 40,
+        backgroundColor: '#339900',
+        padding: 10,
+        marginLeft: 5,
+        borderRadius: 5,
+    },
 });
