@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { useSelector, useDispatch } from 'react-redux';
+import * as tasksAction from "../redux/actions/tasksAction"
 
 import { TaskList } from './TaskList';
-import * as tasksAction from "../redux/actions/tasksAction"
 
 const Tab = createBottomTabNavigator();
 
@@ -15,12 +16,12 @@ export const Tasks = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
-    const reduxTasks = useSelector(state => state.tasks.list)
-    console.log(reduxTasks)
-
     useEffect(() => {
         dispatch(tasksAction.fetchTasks())
     }, [dispatch]);
+
+    const reduxTasks = useSelector(state => state.tasks.list)
+    console.log(reduxTasks)
     
     useEffect(() => {
         loadTasks();
