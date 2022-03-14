@@ -1,7 +1,7 @@
 export const FETCH_TASKS = 'FETCH_TASKS';
 export const ADD_TASKS = 'ADD_TASKS';
 export const ADD_COMPLETED = 'ADD_COMPLETED';
-//export const FETCH_COMP = 'FETCH_COMP';
+export const DELETE_COMP = 'DELETE_COMP';
 
 export const fetchTasks = () => {
     return {
@@ -18,9 +18,16 @@ export const addTasks = (id, text) => {
     }
 }
 
-export const completeTasks = (id, text) => {
+export const completeTasks = (index) => {
     return {
         type: ADD_COMPLETED,
-        payload: { id, text }
+        payload: { index }
+    }
+}
+
+export const deleteTask = (index) => {
+    return {
+        type: DELETE_COMP,
+        payload: { index }
     }
 }

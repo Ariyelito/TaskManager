@@ -1,4 +1,4 @@
-import { ADD_TASKS, FETCH_TASKS, ADD_COMPLETED } from "../actions/tasksAction";
+import { ADD_TASKS, FETCH_TASKS, ADD_COMPLETED, DELETE_COMP } from "../actions/tasksAction";
 
 const initialState = {
     list: [{ id: 1, text: "initial task" }],
@@ -6,6 +6,8 @@ const initialState = {
 }
 
 export default function (state = initialState, action) {
+    let index;
+    let array;
     switch (action.type) {
         case FETCH_TASKS:
             return {
@@ -18,9 +20,21 @@ export default function (state = initialState, action) {
                 list: state.list.concat(action.payload)
             }
         case ADD_COMPLETED:
+            index = action.payload
+            array = state.list.slice()
+            let comp = array.splice(index, 1)
             return {
                 ...state,
-                completed: state.completed.concat(action.payload)
+                completed: state.completed.concat(comp),
+                list: array
+            }
+        case DELETE_COMP:
+            index = action.payload
+            array = state.completed.slice()
+            array.splice(index,1)
+            return {
+                ...state,
+                completed: array
             }
     }
     return state;

@@ -24,6 +24,8 @@ export const Tasks = ({ navigation }) => {
     console.log("redux tasks :")
     console.log(tasks)
     const completed = useSelector(state => state.tasks.completed)
+    console.log("completed tasks :")
+    console.log(completed)
 
 
     useEffect(() => {
@@ -56,13 +58,13 @@ export const Tasks = ({ navigation }) => {
         }
     }
 
-    const completeTask = (index) => {
-        let array = tasks.slice();
-        let comp;
-        index != -1 ? comp = array.splice(index, 1) : console.log('no tasks found to complete')
-        setTasks(array);
-        setCompleted(completed.concat(comp))
-    }
+    // const completeTask = (index) => {
+    //     let array = tasks.slice();
+    //     let comp;
+    //     index != -1 ? comp = array.splice(index, 1) : console.log('no tasks found to complete')
+    //     setTasks(array);
+    //     setCompleted(completed.concat(comp))
+    // }
 
     const deleteTask = (index) => {
         let array = completed.slice();
@@ -79,8 +81,10 @@ export const Tasks = ({ navigation }) => {
                 children={() => <TaskList
                     navigation={navigation}
                     tasks={tasks}
-                    setTasks={() => { }}
-                    removeTask={completeTask} />}
+                    active={true}
+                    // setTasks={() => { }}
+                    // removeTask={completeTask} 
+                    />}
 
                 options={{ title: 'Tâches actives', headerShown: false, tabBarBadge: tasks.length != 0 ? tasks.length : null }}
             />
@@ -89,9 +93,10 @@ export const Tasks = ({ navigation }) => {
                 children={() => <TaskList
                     navigation={navigation}
                     tasks={completed}
-                    active={tasks}
-                    setTasks={() => { }}
-                    removeTask={deleteTask} />}
+                    // active={tasks}
+                    // setTasks={() => { }}
+                    // removeTask={deleteTask} 
+                    />}
                 options={{ title: 'Tâches complétées', headerShown: false, tabBarBadge: completed.length != 0 ? completed.length : null }}
             />
         </Tab.Navigator>

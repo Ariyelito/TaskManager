@@ -8,24 +8,26 @@ import * as tasksAction from "../redux/actions/tasksAction"
 
 export const TaskList = (props) => {
 
-    const removeTask = props.removeTask;
-
-    // const reduxTasks = useSelector(state => state.tasks.list)
+    const dispatch = useDispatch()
 
     const TaskItem = ({ item, index }) => {
         return (
-            <View style={{ flexDirection: 'row', marginBottom:5 }}>
+            <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                 <Pressable
                     style={styles.card}
-                    onPress={() => removeTask(index)}
                 >
                     <Text style={{ fontSize: 15, color: 'black' }}>
                         {item.text}
                     </Text>
                 </Pressable>
                 <Pressable
-                    onPress={() => removeTask(index)}
-                    style={!props.active ? styles.cardAdd : styles.cardDelete}>
+                    onPress={() => {
+                        !!props.active ?
+                            dispatch(tasksAction.completeTasks(index)) :
+                            dispatch(tasksAction.deleteTask(index))
+                    }
+                    }
+                    style={!!props.active ? styles.cardAdd : styles.cardDelete}>
                     <Text style={{ color: 'white', textAlign: 'center' }}>x</Text>
                 </Pressable>
             </View>
@@ -36,11 +38,7 @@ export const TaskList = (props) => {
         return (
             <Pressable
                 onPress={() => {
-                    props.navigation.navigate('Add', {
-                        addTask: props.setTasks,
-                        list: !props.active ? props.tasks : props.active,
-                        active: !props.active ? true : false
-                    });
+                    props.navigation.navigate('Add');
                 }}
                 style={styles.ajouterBtn}>
                 <Text style={{ color: 'white', textAlign: 'center' }}>Ajouter une tâche</Text>
@@ -50,9 +48,8 @@ export const TaskList = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* < console.log/> */}
             <AddBtn />
-            <Text style={{margin:10}}>{!props.active ? 'À compléter :' : 'Complétées :'}</Text>
+            <Text style={{ margin: 10 }}>{!props.active ? 'À compléter :' : 'Complétées :'}</Text>
             <FlatList
                 contentContainerStyle={{}}
                 data={props.tasks}

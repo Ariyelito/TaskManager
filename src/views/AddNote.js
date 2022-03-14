@@ -39,7 +39,6 @@ export const AddNote = ({ route, navigation }) => {
                             id: Date.now(),
                             text: noteItem
                         }
-                        // addTask(list.concat(tempNote));
                         dispatch(tasksAction.addTasks(tempNote.id, tempNote.text))
                         navigation.navigate('Active')
                     }}
