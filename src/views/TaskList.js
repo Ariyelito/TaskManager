@@ -1,9 +1,16 @@
 import React from 'react';
 import { View, SafeAreaView, StyleSheet, Text, Button, Pressable, FlatList } from "react-native";
 
+
+import { useDispatch } from 'react-redux';
+import * as tasksAction from "../redux/actions/tasksAction"
+
+
 export const TaskList = (props) => {
 
     const removeTask = props.removeTask;
+
+    // const reduxTasks = useSelector(state => state.tasks.list)
 
     const TaskItem = ({ item, index }) => {
         return (

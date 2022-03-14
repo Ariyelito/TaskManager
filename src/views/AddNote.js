@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import { View, TextInput, RoundedButton, StyleSheet, Text, Pressable, YellowBox } from "react-native";
 import { LogBox } from 'react-native';
 
+import { useDispatch } from 'react-redux';
+import * as tasksAction from "../redux/actions/tasksAction"
+
+
+
 
 
 export const AddNote = ({ route, navigation }) => {
 
-    const { addTask, list, active } = route.params;
+    const dispatch = useDispatch();
+    // const {addTask, list, active } = route.params;
     const [noteItem, setNoteItem] = useState(null);
 
     LogBox.ignoreLogs([
@@ -33,7 +39,8 @@ export const AddNote = ({ route, navigation }) => {
                             id: Date.now(),
                             text: noteItem
                         }
-                        addTask(list.concat(tempNote));
+                        // addTask(list.concat(tempNote));
+                        dispatch(tasksAction.addTasks(tempNote.id, tempNote.text))
                         navigation.navigate('Active')
                     }}
                     style={styles.addBtn}>

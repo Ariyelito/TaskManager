@@ -11,8 +11,8 @@ const Tab = createBottomTabNavigator();
 
 export const Tasks = ({ navigation }) => {
 
-    const [tasks, setTasks] = useState([]);
-    const [completed, setCompleted] = useState([]);
+    //const [tasks, setTasks] = useState([]);
+    // const [completed, setCompleted] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -20,15 +20,18 @@ export const Tasks = ({ navigation }) => {
         dispatch(tasksAction.fetchTasks())
     }, [dispatch]);
 
-    const reduxTasks = useSelector(state => state.tasks.list)
-    console.log(reduxTasks)
-    
+    const tasks = useSelector(state => state.tasks.list)
+    console.log("redux tasks :")
+    console.log(tasks)
+    const completed = useSelector(state => state.tasks.completed)
+
+
     useEffect(() => {
-        loadTasks();
+        //loadTasks();
     }, []);
 
     useEffect(() => {
-        saveTasks();
+        //saveTasks();
     })
 
     const saveTasks = async () => {
@@ -63,9 +66,10 @@ export const Tasks = ({ navigation }) => {
 
     const deleteTask = (index) => {
         let array = completed.slice();
-        let comp;
-        index != -1 ? comp = array.splice(index, 1) : console.log('no tasks found to delete')
+        // let comp;
+        index != -1 ? array.splice(index, 1) : console.log('no tasks found to delete')
         setCompleted(array);
+
     }
 
     return (
@@ -75,7 +79,7 @@ export const Tasks = ({ navigation }) => {
                 children={() => <TaskList
                     navigation={navigation}
                     tasks={tasks}
-                    setTasks={setTasks}
+                    setTasks={() => { }}
                     removeTask={completeTask} />}
 
                 options={{ title: 'Tâches actives', headerShown: false, tabBarBadge: tasks.length != 0 ? tasks.length : null }}
@@ -86,7 +90,7 @@ export const Tasks = ({ navigation }) => {
                     navigation={navigation}
                     tasks={completed}
                     active={tasks}
-                    setTasks={setTasks}
+                    setTasks={() => { }}
                     removeTask={deleteTask} />}
                 options={{ title: 'Tâches complétées', headerShown: false, tabBarBadge: completed.length != 0 ? completed.length : null }}
             />
