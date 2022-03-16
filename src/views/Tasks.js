@@ -17,24 +17,17 @@ export const Tasks = ({ navigation }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // redux actions
         dispatch(tasksAction.fetchTasks())
     }, [dispatch]);
 
+    // redux (get) states
     const tasks = useSelector(state => state.tasks.list)
     console.log("redux tasks :")
     console.log(tasks)
     const completed = useSelector(state => state.tasks.completed)
     console.log("completed tasks :")
     console.log(completed)
-
-
-    useEffect(() => {
-        //loadTasks();
-    }, []);
-
-    useEffect(() => {
-        //saveTasks();
-    })
 
     const saveTasks = async () => {
         try {
@@ -56,22 +49,6 @@ export const Tasks = ({ navigation }) => {
         } catch (error) {
             console.log('1' + error)
         }
-    }
-
-    // const completeTask = (index) => {
-    //     let array = tasks.slice();
-    //     let comp;
-    //     index != -1 ? comp = array.splice(index, 1) : console.log('no tasks found to complete')
-    //     setTasks(array);
-    //     setCompleted(completed.concat(comp))
-    // }
-
-    const deleteTask = (index) => {
-        let array = completed.slice();
-        // let comp;
-        index != -1 ? array.splice(index, 1) : console.log('no tasks found to delete')
-        setCompleted(array);
-
     }
 
     return (
@@ -101,4 +78,28 @@ export const Tasks = ({ navigation }) => {
             />
         </Tab.Navigator>
     );
+
+    // useEffect(() => {
+    //     loadTasks();
+    // }, []);
+
+    // useEffect(() => {
+    //     saveTasks();
+    // })
+
+    // const completeTask = (index) => {
+    //     let array = tasks.slice();
+    //     let comp;
+    //     index != -1 ? comp = array.splice(index, 1) : console.log('no tasks found to complete')
+    //     setTasks(array);
+    //     setCompleted(completed.concat(comp))
+    // }
+
+    // const deleteTask = (index) => {
+    //     let array = completed.slice();
+    //     // let comp;
+    //     index != -1 ? array.splice(index, 1) : console.log('no tasks found to delete')
+    //     setCompleted(array);
+
+    // }
 };

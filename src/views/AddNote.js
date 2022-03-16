@@ -9,7 +9,7 @@ import * as tasksAction from "../redux/actions/tasksAction"
 
 
 
-export const AddNote = ({ route, navigation }) => {
+export const AddNote = ({ navigation }) => {
 
     const dispatch = useDispatch();
     // const {addTask, list, active } = route.params;
@@ -29,7 +29,6 @@ export const AddNote = ({ route, navigation }) => {
                     onChangeText={(value) => {
                         setNoteItem(value)
                     }}
-                // value={noteItem}
                 />
             </View>
             <View style={styles.container2}>

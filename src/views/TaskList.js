@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, SafeAreaView, StyleSheet, Text, Button, Pressable, FlatList } from "react-native";
+import { View, SafeAreaView, StyleSheet, Text, Pressable, FlatList } from "react-native";
 
 
 import { useDispatch } from 'react-redux';
